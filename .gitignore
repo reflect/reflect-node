@@ -1,0 +1,4 @@
+# Development stuff
+*.sw[onp]
+/node_modules
+/run.js
