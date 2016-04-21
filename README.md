@@ -12,32 +12,24 @@ This package is indexed in npm.
 $ npm install reflect-node
 ```
 
-## Example
+## Generating a Signed Authentication Token
 
-Here's an example of how to upload data to one of your keyspaces.
+Here's an example of how you'd generate a signed authentication token. Signed
+authentication tokens are base64-encoded HMACs that are signed using your
+project key pair's secret key.
 
 ```javascript
-var reflect = require('reflect-node');
+var reflect = require('reflect-node'),
+    params;
 
-var data = [
-    {
-      "customer_id": "customer1",
-      "widget_id": "widget1",
-      "manufactured": "Ohio",
-      "temperature": 150
-    },
-    {
-      "customer_id": "customer1",
-      "widget_id": "widget2",
-      "manufactured": "Ohio",
-      "temperature": 50
-    }
-  ],
-  client = reflect.createClient('<your API token>');
+params = [
+  {
+    "field": "My Field",
+    "op": "=",
+    "value": "My Value"
+  }
+];
 
-// First lookup the keyspace that we want to append data to.
-client.keyspaces.find('{{slug}}', function(keyspace) {
-  // Now we can actually send the data to the API.
-  keyspace.replace('my-tablet', data);
-});
+token = reflect.generateToken('<your secret key>', params);
+console.log(token);
 ```
