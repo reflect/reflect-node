@@ -3,9 +3,6 @@
   "version": "0.2.1",
   "description": "A client- and server-side library for the Reflect API.",
   "main": "./lib/client.js",
-  "scripts": {
-    "test": "gulp test"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/reflect/reflect-node.git"
@@ -15,15 +12,5 @@
   "bugs": {
     "url": "https://github.com/reflect/reflect-node/issues"
   },
-  "homepage": "https://github.com/reflect/reflect-node#readme",
-  "dependencies": {
-    "querystring": "0.2.x",
-    "request": "2.51.x"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-cli": "^0.3.0",
-    "jsdoc": "^3.3.2",
-    "npm-release": "0.0.4"
-  }
+  "homepage": "https://github.com/reflect/reflect-node#readme"
 }
