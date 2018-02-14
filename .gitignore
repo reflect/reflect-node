@@ -1,5 +1,6 @@
 # Development stuff
 *.sw[onp]
 /node_modules
+/out
 /run.js
 *.log

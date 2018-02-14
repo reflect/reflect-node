@@ -1,8 +1,6 @@
 # reflect-node
 
-This is a client for the [Reflect API](https://reflect.io/docs/). Currently,
-it's pre-alpha--only a very few set of API endpoints are supported, namely
-around uploading data.
+This is a client for the [Reflect API](https://reflect.io/docs/).
 
 ## Installation
 
@@ -12,24 +10,25 @@ This package is indexed in npm.
 $ npm install reflect-node
 ```
 
-## Generating a Signed Authentication Token
+## Generating an Authentication Token
 
-Here's an example of how you'd generate a signed authentication token. Signed
-authentication tokens are base64-encoded HMACs that are signed using your
-project key pair's secret key.
+Here's an example of how you'd generate an encrypted authentication token.
 
 ```javascript
-var reflect = require('reflect-node'),
-    params;
+var reflect = require('reflect-node');
 
-params = [
-  {
-    "field": "My Field",
-    "op": "=",
-    "value": "My Value"
-  }
-];
+var accessKey = 'd232c1e5-6083-4aa7-9042-0547052cc5dd',
+    secretKey = '74678a9b-685c-4c14-ac45-7312fe29de06';
 
-token = reflect.generateToken('<your secret key>', params);
-console.log(token);
+var b = new reflect.ProjectTokenBuilder(accessKey)
+  .setAttribute('user-id', 1234)
+  .setAttribute('user-name', 'Billy Bob')
+  .addParameter({
+    'field': 'My Field',
+    'op': '=',
+    'value': 'My Value',
+  });
+b.build(secretKey, function(err, token) {
+  console.log(token);
+});
 ```
