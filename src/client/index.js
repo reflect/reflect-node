@@ -3,7 +3,10 @@ const debug = require('debug')('reflect-node');
 const Errors = require('../errors');
 const Reporting = require('./reporting');
 
-const API_ROOT = 'https://api.reflect.io';
+const DEFAULT_HOST = 'https://api.reflect.io';
+
+const nodeVersion = process.version;
+const pkgVersion = require('../../package.json').version;
 
 const methods = {
   GET: 'get',
@@ -21,14 +24,15 @@ const logDebug = (method, url, status, headers) => debug(
 
 function Client(token) {
   this._token = token;
+  this._host = DEFAULT_HOST;
 
   this.reporting = new Reporting(this);
 }
 
 Client.prototype.request = function request(method, path, opts = {}) {
-  const url = `${API_ROOT}/${path}`;
+  const url = `${this._host}/${path}`;
   const headers = {
-    'User-Agent': 'reflect-node', // TODO: Add version
+    'User-Agent': `reflect-node v${pkgVersion} (node ${nodeVersion})`, // TODO: Add version
   };
 
   const config = Object.assign(opts, {
