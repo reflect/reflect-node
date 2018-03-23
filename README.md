@@ -48,7 +48,7 @@ them. The various resources and their methods are documented below.
 
 ##### Reporting
 
-Our reporting APIs are allow you to query the connections you've previously
+Our reporting APIs are allow you to query the projects you've previously
 configured in Reflect.
 
 We currently only support the `report()` method. This method accepts four
@@ -56,7 +56,7 @@ arguments:
 
 Name | Type | Description
 -----|------|--------------
-`connectionSlug` | string | The connection slug you wish to query
+`projectSlug` | string | The project slug you wish to query
 `dimensions` | array | An array of dimension names you wish to query
 `metrics` | array | An array of metric names to query
 `options` | object | Options to query with
@@ -68,9 +68,9 @@ This method returns a promise.
 Example:
 
 ```javascript
-client.reporting.report('my-connection', ['Dimension 1'], ['Metric 1'])
+client.reporting.report('my-project', ['Dimension 1'], ['Metric 1'])
   .then((data) => {
-    console.log('data');
+    console.log(data);
   })
 ```
 
