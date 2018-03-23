@@ -1,4 +1,5 @@
 const axios = require('axios');
+const Errors = require('../errors');
 const Reporting = require('./reporting');
 
 const API_ROOT = 'https://api.reflect.io';
@@ -27,7 +28,10 @@ Client.prototype.request = function request(method, url, opts) {
     auth: { password: this._token },
   });
 
-  return axios(config);
+  return axios(config)
+    .catch((error) => {
+      throw Errors.fromResponse(error);
+    });
 };
 
 Client.prototype.get = function get(path, opts) {

@@ -12,9 +12,6 @@
   },
   "globals": {
     "window": true,
-    "document": true,
-    "describe": true,
-    "it": true,
-    "context": true,
+    "document": true
   }
 }
