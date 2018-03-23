@@ -1,11 +1,11 @@
-'use strict';
 
-var jose = require('node-jose');
-var utils = require('./utils');
 
-var VIEW_IDENTIFIERS_CLAIM_NAME = 'http://reflect.io/s/v3/vid';
-var PARAMETERS_CLAIM_NAME = 'http://reflect.io/s/v3/p';
-var ATTRIBUTES_CLAIM_NAME = 'http://reflect.io/s/v3/a';
+const jose = require('node-jose');
+const utils = require('./utils');
+
+const VIEW_IDENTIFIERS_CLAIM_NAME = 'http://reflect.io/s/v3/vid';
+const PARAMETERS_CLAIM_NAME = 'http://reflect.io/s/v3/p';
+const ATTRIBUTES_CLAIM_NAME = 'http://reflect.io/s/v3/a';
 
 /**
  * Builder for encrypted tokens.
@@ -26,7 +26,7 @@ function ProjectTokenBuilder(accessKey) {
     parameters: [],
     attributes: Object.create(null),
   };
-};
+}
 
 /**
  * Sets the expiration for the constructed token to the given time.
@@ -82,7 +82,7 @@ ProjectTokenBuilder.prototype.setAttribute = function setAttribute(name, value) 
   this._claims.attributes[name] = value;
 
   return this;
-}
+};
 
 /**
  * @callback ProjectTokenBuilder.buildCallback
@@ -100,9 +100,9 @@ ProjectTokenBuilder.prototype.setAttribute = function setAttribute(name, value) 
  *   A callback to invoke with the constructed token when it is ready.
  */
 ProjectTokenBuilder.prototype.build = function build(secretKey, callback) {
-  var secretKeyBuffer = utils.secretKeyFromUUID(secretKey);
+  const secretKeyBuffer = utils.secretKeyFromUUID(secretKey);
 
-  var options = {
+  const options = {
     format: 'compact',
     zip: true,
     fields: {
@@ -116,12 +116,12 @@ ProjectTokenBuilder.prototype.build = function build(secretKey, callback) {
     use: 'enc',
     kid: this.accessKey,
     k: secretKeyBuffer,
-  }).then(function(key) {
-    var encrypter = jose.JWE.createEncrypt(options, key);
+  }).then((key) => {
+    const encrypter = jose.JWE.createEncrypt(options, key);
 
-    var now = Math.floor(Date.now() / 1000);
+    const now = Math.floor(Date.now() / 1000);
 
-    var payload = {
+    const payload = {
       iat: now,
       nbf: now,
     };
@@ -135,8 +135,8 @@ ProjectTokenBuilder.prototype.build = function build(secretKey, callback) {
     }
 
     if (this._claims.parameters.length) {
-      payload[PARAMETERS_CLAIM_NAME] = this._claims.parameters.map(function(parameter) {
-        var mapping = {
+      payload[PARAMETERS_CLAIM_NAME] = this._claims.parameters.map((parameter) => {
+        const mapping = {
           field: parameter.field,
           op: parameter.op,
         };
@@ -157,12 +157,12 @@ ProjectTokenBuilder.prototype.build = function build(secretKey, callback) {
       payload[ATTRIBUTES_CLAIM_NAME] = this._claims.attributes;
     }
 
-    encrypter.update(JSON.stringify(payload)).final().then(function(token) {
+    encrypter.update(JSON.stringify(payload)).final().then((token) => {
       callback(null, token);
-    }).catch(function(err) {
+    }).catch((err) => {
       callback(err);
     });
-  }.bind(this)).catch(function(err) {
+  }).catch((err) => {
     callback(err);
   });
 };
