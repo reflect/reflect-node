@@ -1,4 +1,5 @@
 const axios = require('axios');
+const debug = require('debug')('reflect-node');
 const Errors = require('../errors');
 const Reporting = require('./reporting');
 
@@ -9,6 +10,14 @@ const methods = {
   PUT: 'put',
   POST: 'post',
 };
+
+const logDebug = (method, url, status, headers) => debug(
+  'method=%s url=%s: status=%s reflect-request-identifier=%s',
+  method,
+  url,
+  status,
+  headers['reflect-request-identifier']
+);
 
 function Client(token) {
   this._token = token;
@@ -29,7 +38,22 @@ Client.prototype.request = function request(method, url, opts) {
   });
 
   return axios(config)
+    .then(res => logDebug(
+      method,
+      url,
+      res.status,
+      res.headers
+    ))
     .catch((error) => {
+      if (error.response) {
+        logDebug(
+          method,
+          url,
+          error.response.status,
+          error.response.headers
+        );
+      }
+
       throw Errors.fromResponse(error);
     });
 };
