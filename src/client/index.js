@@ -25,7 +25,8 @@ function Client(token) {
   this.reporting = new Reporting(this);
 }
 
-Client.prototype.request = function request(method, url, opts) {
+Client.prototype.request = function request(method, path, opts = {}) {
+  const url = `${API_ROOT}/${path}`;
   const headers = {
     'User-Agent': 'reflect-node', // TODO: Add version
   };
@@ -38,12 +39,16 @@ Client.prototype.request = function request(method, url, opts) {
   });
 
   return axios(config)
-    .then(res => logDebug(
-      method,
-      url,
-      res.status,
-      res.headers
-    ))
+    .then((res) => {
+      logDebug(
+        method,
+        url,
+        res.status,
+        res.headers
+      );
+
+      return res.data;
+    })
     .catch((error) => {
       if (error.response) {
         logDebug(
@@ -59,9 +64,7 @@ Client.prototype.request = function request(method, url, opts) {
 };
 
 Client.prototype.get = function get(path, opts) {
-  const url = `${API_ROOT}/${path}`;
-
-  return this.request(methods.GET, url, opts);
+  return this.request(methods.GET, path, opts);
 };
 
 exports.Client = Client;

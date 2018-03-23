@@ -12,7 +12,7 @@ describe('Reporting', () => {
     this.mockClient.get.resetHistory();
   });
 
-  describe('report()', () => {
+  describe('#report()', () => {
     it('should generate the request', () => {
       const rep = new Reporting(this.mockClient);
       const options = { test: true };
