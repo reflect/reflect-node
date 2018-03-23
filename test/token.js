@@ -1,9 +1,9 @@
+const chai = require('chai');
 const jose = require('node-jose');
 const uuidv4 = require('uuid/v4');
+
 const token = require('../src/token');
 const utils = require('../src/utils');
-
-const chai = require('chai');
 
 describe('ProjectTokenBuilder', () => {
   const accessKey = uuidv4();

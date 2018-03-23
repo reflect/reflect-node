@@ -1,5 +1,3 @@
-
-
 const jose = require('node-jose');
 const utils = require('./utils');
 

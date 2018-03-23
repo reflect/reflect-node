@@ -1,4 +1,4 @@
-exports.secretKeyFromUUID = function secretKeyFromUUID(uuid) {
+exports.secretKeyFromUUID = (uuid) => {
   const buffer = new ArrayBuffer(16);
   const view = new DataView(buffer);
 

@@ -1,3 +1,7 @@
-const token = require('./token');
+const { ProjectTokenBuilder } = require('./token');
+const { Client } = require('./client');
 
-exports.ProjectTokenBuilder = token.ProjectTokenBuilder;
+exports = {
+  Client,
+  ProjectTokenBuilder,
+};
