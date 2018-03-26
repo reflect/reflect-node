@@ -1,25 +1,19 @@
 const chai = require('chai');
-const sinon = require('sinon');
+const mockClient = require('./mockClient');
 
 const Reporting = require('../../src/client/reporting');
 
 describe('Reporting', () => {
-  before(() => {
-    this.mockClient = { get: sinon.spy() };
-  });
-
-  afterEach(() => {
-    this.mockClient.get.resetHistory();
-  });
+  beforeEach(mockClient.reset);
 
   describe('#report()', () => {
     it('should generate the request', () => {
-      const rep = new Reporting(this.mockClient);
+      const rep = new Reporting(mockClient);
       const options = { test: true };
 
       rep.report('my-project', ['My dimension'], ['My metric'], options);
 
-      const args = this.mockClient.get.args[0];
+      const args = mockClient.get.args[0];
 
       chai.expect(args[0]).to.eql('v1/projects/my-project/report');
       chai.expect(args[1].params).to.eql({

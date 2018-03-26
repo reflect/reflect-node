@@ -77,6 +77,11 @@ client.reporting.report('my-project', ['Dimension 1'], ['Metric 1'])
   })
 ```
 
+##### Projects
+
+List, create, update, and delete projects. Refer to the [JSDoc documentation](https://reflect.github.io/reflect-node/jsdoc/Projects.html)
+for usage.
+
 ### Debugging
 
 To debug `reflect-node`, start your Node environment with the following

@@ -4,13 +4,8 @@ const nock = require('nock');
 const { Client } = require('../../src/client');
 
 describe('Client', () => {
-  before(() => {
-    nock.disableNetConnect();
-  });
-
-  beforeEach(() => {
-    nock.cleanAll();
-  });
+  before(nock.disableNetConnect);
+  beforeEach(nock.cleanAll);
 
   describe('init', () => {
     it('should initialize client with token', () => {
@@ -20,7 +15,7 @@ describe('Client', () => {
     });
   });
 
-  describe('#request', () => {
+  describe('#request()', () => {
     it('should make the correct request', (done) => {
       nock('https://api.reflect.io')
         .get('/v1/projects/my-project/report')
