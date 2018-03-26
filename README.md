@@ -5,6 +5,9 @@ This is a client for the [Reflect API](https://reflect.io/docs/reference/rest-ap
 This library includes support for [generating authentication tokens](#Generating-an-Authentication-Token)
 as well as [using the Reflect REST API](#API-methods).
 
+This README outlines basic usage. For more detailed documentation, please
+refer to [JSDoc](https://reflect.github.io/reflect-node/jsdoc).
+
 ## Installation
 
 Install reflect-node through npm:
