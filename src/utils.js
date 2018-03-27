@@ -10,7 +10,7 @@ exports.secretKeyFromUUID = (uuid) => {
   return Buffer.from(buffer);
 };
 
-exports.errorFromResponse = (response) => {
+exports.errorFromResponse = function errorFromResponse(response) {
   let error;
 
   if (response.response) {
@@ -24,7 +24,7 @@ exports.errorFromResponse = (response) => {
     error = new Error(response.message);
   }
 
-  Error.captureStackTrace(error, this);
+  Error.captureStackTrace(error);
 
   return error;
 };
