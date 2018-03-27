@@ -1,28 +1,42 @@
 {
   "name": "reflect-node",
-  "version": "0.3.0",
-  "description": "A client- and server-side library for the Reflect API.",
+  "version": "1.0.0",
+  "description": "Node interface for the Reflect API",
   "main": "./src/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/reflect/reflect-node.git"
   },
-  "author": "Brad Heller",
+  "author": "engineering@reflect.io",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/reflect/reflect-node/issues"
   },
   "homepage": "https://github.com/reflect/reflect-node#readme",
+  "engines": { "node" : ">=6.0.0" },
   "devDependencies": {
+    "babel-eslint": "^8.2.2",
     "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-mocha": "^4.12.1",
+    "eslint-plugin-react": "^7.7.0",
     "jsdoc": "^3.5.5",
     "mocha": "^5.0.1",
+    "nock": "^9.2.3",
+    "sinon": "^4.4.8",
     "uuid": "^3.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "debug": "^3.1.0",
     "node-jose": "^0.11.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/mocha --recursive",
+    "js-lint": "./node_modules/.bin/eslint --quiet src test",
+    "jsdoc": "./node_modules/.bin/jsdoc src -r -R README.md -d docs/jsdoc"
   }
 }
