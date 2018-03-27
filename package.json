@@ -13,6 +13,7 @@
     "url": "https://github.com/reflect/reflect-node/issues"
   },
   "homepage": "https://github.com/reflect/reflect-node#readme",
+  "engines": { "node" : ">=6.0.0" },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
     "chai": "^4.1.2",
