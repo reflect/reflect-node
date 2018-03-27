@@ -1,5 +1,6 @@
 const axios = require('axios');
-const debug = require('debug')('reflect-node');
+const { name: pkgName, version: pkgVersion } = require('../../package.json');
+const debug = require('debug')(pkgName);
 const Errors = require('../errors');
 
 const Reporting = require('./reporting');
@@ -8,7 +9,6 @@ const Projects = require('./projects');
 const DEFAULT_HOST = 'https://api.reflect.io';
 
 const nodeVersion = process.version;
-const pkgVersion = require('../../package.json').version;
 
 const methods = {
   GET: 'get',
@@ -56,7 +56,7 @@ function Client(token, host) {
 Client.prototype.request = function request(method, path, opts = {}) {
   const url = `${this._host}/${path}`;
   const headers = {
-    'User-Agent': `reflect-node v${pkgVersion} (node ${nodeVersion})`, // TODO: Add version
+    'User-Agent': `${pkgName} v${pkgVersion} (node ${nodeVersion})`,
   };
 
   const config = Object.assign(opts, {
