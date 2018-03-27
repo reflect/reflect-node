@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { name: pkgName, version: pkgVersion } = require('../../package.json');
 const debug = require('debug')(pkgName);
-const Errors = require('../errors');
+const utils = require('../utils');
 
 const Reporting = require('./reporting');
 const Projects = require('./projects');
@@ -87,7 +87,7 @@ Client.prototype.request = function request(method, path, opts = {}) {
         );
       }
 
-      throw Errors.fromResponse(error);
+      throw utils.errorFromResponse(error);
     });
 };
 
