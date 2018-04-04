@@ -1,6 +1,6 @@
 {
   "name": "reflect-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node interface for the Reflect API",
   "main": "./src/index.js",
   "repository": {
@@ -13,7 +13,9 @@
     "url": "https://github.com/reflect/reflect-node/issues"
   },
   "homepage": "https://github.com/reflect/reflect-node#readme",
-  "engines": { "node" : ">=6.0.0" },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
     "chai": "^4.1.2",
