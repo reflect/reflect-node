@@ -21,7 +21,12 @@ function Reporting(client) {
  */
 Reporting.prototype.report = function report(projectSlug, dimensions, metrics, options = {}) {
   const params = Object.keys(options).reduce((opts, option) => {
-    opts[option] = JSON.stringify(options[option]);
+    let value = options[option];
+    if (typeof value !== 'string') {
+      value = JSON.stringify(value);
+    }
+
+    opts[option] = value;
 
     return opts;
   }, {});
