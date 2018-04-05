@@ -9,7 +9,7 @@ describe('Reporting', () => {
   describe('#report()', () => {
     it('should generate the request', () => {
       const rep = new Reporting(mockClient);
-      const options = { test: true };
+      const options = { test: true, timezone: 'Etc/UTC' };
 
       rep.report('my-project', ['My dimension'], ['My metric'], options);
 
@@ -20,6 +20,7 @@ describe('Reporting', () => {
         dimensions: '["My dimension"]',
         metrics: '["My metric"]',
         test: 'true',
+        timezone: 'Etc/UTC',
       });
     });
   });
